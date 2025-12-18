@@ -37,7 +37,3 @@
 - Composer init - to create the json file
 - composer require
 - use sqlite db file
-
-### Learning points
-- What is PDO?
-- 
