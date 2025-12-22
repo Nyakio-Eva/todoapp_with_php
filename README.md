@@ -35,5 +35,5 @@
 
 ### Start building
 - Composer init - to create the json file
-- composer require
+- composer require: vlucas/phpdotenv
 - use sqlite db file
