@@ -21,7 +21,7 @@
 ### DB
 - store tasks data in tables 
 - users table
-- todo tasks table
+- tasks table
 - completed tasks table
 
 ### Relationships
@@ -36,4 +36,8 @@
 ### Start building
 - Composer init - to create the json file
 - composer require: vlucas/phpdotenv
-- use sqlite db file
+- use sqlite db file = todos.db
+- write a pdo connection script or database configuration = dbConfig.php
+- create the first table= tasks
+- write script file to add a task to db
+
