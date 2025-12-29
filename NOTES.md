@@ -51,3 +51,8 @@
     PDO::FETCH_LAZY: combines PDO::FETCH_BOTH/PDO::FETCH_OBJ, creating the object variable names as they are used.
     PDO::FETCH_NUM: returns an array indexed by column number.
     PDO::FETCH_OBJ: returns an anonymous object with property names that correspond to the column names.
+
+#### Superglobal arrays
+- $_POST- a superglobal array provided by php. Its available in every scope.
+- Its populated by php when the request method is POST.
+- the request body= associative array where keys = form name attributes , values= user input.

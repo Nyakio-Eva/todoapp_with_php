@@ -11,9 +11,11 @@ $dbPath=$_ENV['DB_PATH'];
 try{
     $connection=new PDO("sqlite:$dbPath");  
     $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
     echo "Connected successfully!\n";
 
     $db="
+        DROP TABLE IF EXISTS tasks;
         CREATE TABLE IF NOT EXISTS tasks(
             id INTEGER PRIMARY KEY,
             title TEXT NOT NULL,
@@ -31,8 +33,7 @@ try{
 
 
     echo "table created successfully!\n";
-    $connection=null;
-
+   
 }catch(PDOException $e){
   echo "Connection failed: " . $e->getMessage()."\n";
 }

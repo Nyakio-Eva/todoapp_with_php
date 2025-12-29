@@ -39,5 +39,10 @@
 - use sqlite db file = todos.db
 - write a pdo connection script or database configuration = dbConfig.php
 - create the first table= tasks
-- write script file to add a task to db
+- write script file to add a task to db(
+     - a connection
+     - the query
+     - html form
+)
+- Browser -> Web Server-> PHP -> Database
 
