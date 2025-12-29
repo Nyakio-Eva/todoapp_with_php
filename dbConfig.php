@@ -15,7 +15,7 @@ try{
     echo "Connected successfully!\n";
 
     $db="
-        DROP TABLE IF EXISTS tasks;
+        
         CREATE TABLE IF NOT EXISTS tasks(
             id INTEGER PRIMARY KEY,
             title TEXT NOT NULL,
@@ -38,4 +38,5 @@ try{
   echo "Connection failed: " . $e->getMessage()."\n";
 }
 
+$connection=null;
 ?>
