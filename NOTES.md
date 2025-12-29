@@ -42,6 +42,7 @@
 
 #### Fetching data
 - data is fetched using the ->fetch() method
+- $STH->setFetchMode(PDO::FETCH_ASSOC);
 - Before calling fetch, it's best to tell PDO how you'd like the data to be fetched. You have the following options:
     PDO::FETCH_ASSOC: returns an array indexed by column name.
     PDO::FETCH_BOTH (default): returns an array indexed by both column name and number.

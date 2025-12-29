@@ -10,7 +10,7 @@
     <form action="src/createTask.php" method="post">
       <input type="text" name="task" placeholder="new task" required><br>
       <button type="submit">Add Task</button>
-   </form>
+    </form>
 </body>
 </html>
 
