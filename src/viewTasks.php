@@ -13,7 +13,9 @@ $sql->setFetchMode(PDO::FETCH_ASSOC);
 $allTasks=$sql->fetchAll();
 
 foreach($allTasks as $row){
-    echo $row["title"] ."\n";
-    echo '<form> <input="checkbox">
-    </form>'  .$row["is_complete"] ."\n";
+    
+    echo '<form>';
+    echo htmlspecialchars($row["title"]);
+    echo '<input type="checkbox">';
+    echo '</form>'  .$row["is_complete"] ."\n";
 }
