@@ -8,4 +8,4 @@ $sql=$connection->prepare($updatedTask);
 
 $sql->execute();
 
-echo $sql->rowCount() . "task marked done!\n";
+echo $sql->rowCount();

@@ -8,4 +8,3 @@ $sql=$connection->prepare("INSERT INTO tasks(title) values(:title)");
 
 $sql->execute(['title'=> $task]);
 
-echo "New record created successfully!\n";

@@ -12,7 +12,7 @@ try{
     $connection=new PDO("sqlite:$dbPath");  
     $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    echo "Connected successfully!\n";
+    // echo "Connected successfully!\n";
 
     $db="
         
@@ -32,7 +32,7 @@ try{
     $connection->exec($db);
 
 
-    echo "table created successfully!\n";
+    // echo "table created successfully!\n";
    
 }catch(PDOException $e){
   echo "Connection failed: " . $e->getMessage()."\n";
