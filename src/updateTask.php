@@ -1,11 +1,18 @@
 <?php
 require_once __DIR__ . '/../dbConfig.php';
 
-$updatedTask= "UPDATE tasks SET is_completed=1 WHERE id=1"
+$task_id=$_POST["task_id"];
 
+$updatedTask= "UPDATE tasks SET is_completed=1 WHERE id=:task_id";
 
 $sql=$connection->prepare($updatedTask);
 
+// Bind the parameter
+$sql->bindParam(':task_id', $task_id, PDO::PARAM_INT);
+
+
 $sql->execute();
 
-echo $sql->rowCount();
+
+
+header('Location: /index.php');

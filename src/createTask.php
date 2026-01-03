@@ -8,3 +8,4 @@ $sql=$connection->prepare("INSERT INTO tasks(title) values(:title)");
 
 $sql->execute(['title'=> $task]);
 
+header('Location: /index.php');
