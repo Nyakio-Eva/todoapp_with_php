@@ -3,10 +3,8 @@ require_once __DIR__ . '/dbConfig.php';
 
 $tasks="SELECT * FROM tasks";
 
-$sql=$connection->prepare($tasks);
+$sql=$connection->query($tasks);
 
-
-$sql->execute();
 
 $sql->setFetchMode(PDO::FETCH_ASSOC);
 
@@ -24,7 +22,7 @@ $allTasks=$sql->fetchAll();
     
 </head>
 <body>
-   <h1>INERTIABREAKER 2026</h1><br>
+   <h1>INERTIABREAKER</h1><br>
     <form action="src/createTask.php" method="post">
       <input type="text" name="task" placeholder="new task" required>
       <button type="submit">Add Task</button><br>
