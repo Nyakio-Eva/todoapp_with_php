@@ -34,7 +34,7 @@ $allTasks=$sql->fetchAll();
         echo "<div>
          <label>" . $row["title"] . "</label>
          <form action='/src/deleteTask.php' method='post' style='display:inline'>
-          <input type='hidden' name='task_id' value='".$row["id"]."'><button type='submit'>Edit Task</button>
+          <input type='hidden' name='task_id' value='".$row["id"]."'><button type='submit'>Delete Task</button>
           </form> 
          <form action='/src/UpdateTask.php' method='post' style='display:inline'> mark complete
           <input type='hidden' name='task_id' value='".$row["id"]."'>
