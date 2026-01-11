@@ -29,16 +29,19 @@ $allTasks=$sql->fetchAll();
     </form>
     <br>
      <?php
-      foreach ($allTasks as $row){
+      foreach ($allTasks as $task){
+        $completedTask=$task['is_complete'] ? 'text-decoration : line-through;' : '';
+        $checked=$task['is_complete']? 'checked disabled':'';
         
         echo "<div>
-         <label>" . $row["title"] . "</label>
+         <label style='{$completedTask}'>" . htmlspecialchars($task["title"]) . "</label>
          <form action='/src/deleteTask.php' method='post' style='display:inline'>
-          <input type='hidden' name='task_id' value='".$row["id"]."'><button type='submit'>Delete Task</button>
+          <input type='hidden' name='task_id' value='".$task["id"]."'><button type='submit'>Delete Task</button>
           </form> 
-         <form action='/src/UpdateTask.php' method='post' style='display:inline'> mark complete
-          <input type='hidden' name='task_id' value='".$row["id"]."'>
-          <input type='checkbox' onchange='this.form.submit()'>
+         <form action='/src/updateTask.php' method='post' style='display:inline'> mark complete
+          <input type='hidden' name='task_id' value='".$task["id"]."'>
+          <input type='checkbox' {$checked} onchange='this.form.submit()'>
+          
           </form>
           
         </div> \n";
