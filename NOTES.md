@@ -57,3 +57,5 @@
 - $_POST- a superglobal array provided by php. Its available in every scope.
 - Its populated by php when the request method is POST.
 - the request body is parsed by php into an associative array where keys = form name attributes , values= user input.
+
+- $_GET is filled from the query string

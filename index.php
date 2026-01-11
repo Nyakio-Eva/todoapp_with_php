@@ -35,15 +35,18 @@ $allTasks=$sql->fetchAll();
         
         echo "<div>
          <label style='{$completedTask}'>" . htmlspecialchars($task["title"]) . "</label>
-         <form action='/src/deleteTask.php' method='post' style='display:inline'>
-          <input type='hidden' name='task_id' value='".$task["id"]."'><button type='submit'>Delete Task</button>
-          </form> 
+
+         <a href='/edit_task.php?id=".htmlspecialchars($task['id'])."' style='display:inline-block; padding:3px; border:1px solid #000000; text-decoration:none;'> Edit Task</a>
+
          <form action='/src/updateTask.php' method='post' style='display:inline'> mark complete
           <input type='hidden' name='task_id' value='".$task["id"]."'>
           <input type='checkbox' {$checked} onchange='this.form.submit()'>
-          
           </form>
-          
+
+         <form action='/src/deleteTask.php' method='post' style='display:inline'>
+          <input type='hidden' name='task_id' value='".$task["id"]."'><button type='submit'>Delete Task</button>
+          </form> 
+
         </div> \n";
       }
         
