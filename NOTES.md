@@ -1,4 +1,5 @@
 
+
 ### Learning points
 - What is PDO? PHP Database Objects= acts as an abstraction layer between php and the database of choice.
 - 

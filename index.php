@@ -1,9 +1,9 @@
 <?php
-require_once __DIR__ . '/dbConfig.php';
+require_once __DIR__ . '/mysqlDbConfig.php';
 
 $tasks="SELECT * FROM tasks";
 
-$sql=$connection->query($tasks);
+$sql=$dbh->query($tasks);
 
 
 $sql->setFetchMode(PDO::FETCH_ASSOC);

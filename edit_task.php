@@ -1,9 +1,9 @@
 <?php
-require_once __DIR__ . '/dbConfig.php';
+require_once __DIR__ . '/mysqlDbConfig.php';
 
 $task_id=$_GET["id"] ?? null;
 
-$sql=$connection->prepare("SELECT * FROM tasks WHERE id=:id");
+$sql=$dbh->prepare("SELECT * FROM tasks WHERE id=:id");
 $sql->execute(['id'=>$task_id]);
 
 $task=$sql->fetch(PDO::FETCH_ASSOC);
