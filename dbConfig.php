@@ -15,13 +15,13 @@ try{
     // echo "Connected successfully!\n";
 
     $db="
-         
+        
 
         CREATE TABLE IF NOT EXISTS tasks(
             id INTEGER PRIMARY KEY,
             title TEXT NOT NULL,
             is_complete INTEGER DEFAULT 0,
-            priority VARCHAR(20)CHECK (priority IN ('High','Medium','low')),
+            priority TEXT CHECK (priority IN ('High', 'Medium', 'Low')),
             due_date DATE,
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         );

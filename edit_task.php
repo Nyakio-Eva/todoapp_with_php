@@ -21,11 +21,13 @@ $task=$sql->fetch(PDO::FETCH_ASSOC);
     <form action='/src/editTask.php' method='post' style='display:inline'>
           <input type='hidden' name='task_id' value='<?=$task["id"]?>'>
           <input type='text' name='title' value='<?= htmlspecialchars($task["title"])?>'>
+          <label for="priority">Priority:</label>
           <select id="priority" name="priority" required>
                 <option value="High">High</option>
                 <option value="Medium">Medium</option>
                 <option value="Low">Low</option>
           </select>
+          <label for="due_date">Due date:</label>
           <input type="date" name="due_date" value='<?= htmlspecialchars($task["due_date"])?>' required>
           <button type='submit'>Save Task</button>
    </form> 

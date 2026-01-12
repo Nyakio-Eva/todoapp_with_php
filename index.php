@@ -43,7 +43,8 @@ $allTasks=$sql->fetchAll();
         
         echo "<div>
          <label style='{$completedTask}'>" . htmlspecialchars($task["title"]) . "</label>
-
+         <label style='color:green'>priority: ". $task["priority"]."</label>
+         <label style='color:brown'>Due date: ". $task["due_date"]."</label>
          <a href='/edit_task.php?id=".htmlspecialchars($task['id'])."' style='display:inline-block; padding:3px; border:1px solid #000000; text-decoration:none;'> Edit Task</a>
 
          <form action='/src/updateTask.php' method='post' style='display:inline'> mark complete
@@ -53,7 +54,6 @@ $allTasks=$sql->fetchAll();
 
          <form action='/src/deleteTask.php' method='post' style='display:inline'>
           <input type='hidden' name='task_id' value='".$task["id"]."'><button type='submit'>Delete Task</button>
-          <input type='reset' value='Reset'>
           </form> 
 
         </div> \n";
