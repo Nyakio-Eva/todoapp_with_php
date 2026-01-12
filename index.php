@@ -1,9 +1,9 @@
 <?php
-require_once __DIR__ . '/mysqlDbConfig.php';
+require_once __DIR__ . '/dbConfig.php';
 
 $tasks="SELECT * FROM tasks";
 
-$sql=$dbh->query($tasks);
+$sql=$connection->query($tasks);
 
 
 $sql->setFetchMode(PDO::FETCH_ASSOC);
@@ -25,6 +25,14 @@ $allTasks=$sql->fetchAll();
    <h1>INERTIABREAKER</h1><br>
     <form action="src/createTask.php" method="post">
       <input type="text" name="task" placeholder="new task" required>
+      <label for="priority">Priority:</label>
+      <select id="priority" name="priority" required>
+        <option value="High">High</option>
+        <option value="Medium">Medium</option>
+        <option value="Low">Low</option>
+      </select>
+      <label for="due_date">Due date:</label>
+      <input type="date" name="due_date" required>
       <button type="submit">Add Task</button><br>
     </form>
     <br>
@@ -45,6 +53,7 @@ $allTasks=$sql->fetchAll();
 
          <form action='/src/deleteTask.php' method='post' style='display:inline'>
           <input type='hidden' name='task_id' value='".$task["id"]."'><button type='submit'>Delete Task</button>
+          <input type='reset' value='Reset'>
           </form> 
 
         </div> \n";
