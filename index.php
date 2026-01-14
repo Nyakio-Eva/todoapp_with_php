@@ -23,6 +23,10 @@ $allTasks=$sql->fetchAll();
 </head>
 <body>
    <h1>INERTIABREAKER</h1><br>
+   <div style="display:flex; justify-content:center; margin:10px;">
+   <a href="/dashboard.php" style="background-color:purple; padding:10px 20px; color:white; text-decoration:none;" >View Dashboard</a>
+   </div>
+    
     <form action="src/createTask.php" method="post">
       <input type="text" name="task" placeholder="new task" required>
       <label for="priority">Priority:</label>
@@ -35,11 +39,13 @@ $allTasks=$sql->fetchAll();
       <input type="date" name="due_date" required>
       <button type="submit">Add Task</button><br>
     </form>
+   
     <br>
      <?php
       foreach ($allTasks as $task){
         $completedTask=$task['is_complete'] ? 'text-decoration : line-through;' : '';
-        $checked=$task['is_complete']? 'checked disabled':'';
+        $checked=$task['is_complete'] ? 'checked': '';
+        $value=$task['is_complete'] ? 1:0;
         
         echo "<div>
          <label style='{$completedTask}'>" . htmlspecialchars($task["title"]) . "</label>
@@ -49,7 +55,7 @@ $allTasks=$sql->fetchAll();
 
          <form action='/src/updateTask.php' method='post' style='display:inline'> mark complete
           <input type='hidden' name='task_id' value='".$task["id"]."'>
-          <input type='checkbox' {$checked} onchange='this.form.submit()'>
+          <input type='checkbox' {$checked} name='is_checked' value='{$value}'  onchange='this.form.submit()'>
           </form>
 
          <form action='/src/deleteTask.php' method='post' style='display:inline'>
