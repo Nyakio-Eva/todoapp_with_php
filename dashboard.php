@@ -4,13 +4,8 @@ require_once __DIR__. '/dbConfig.php';
 $sql=$connection->query("SELECT COUNT(*) AS total FROM tasks");
 $total_tasks=$sql->fetch(PDO::FETCH_ASSOC)['total'];
 
-
-
-
 $sql=$connection->query("SELECT COUNT(*) AS completed FROM tasks WHERE is_complete=1");
 $result=$sql->fetch(PDO::FETCH_ASSOC)['completed'];
-
-
 
 
 $sql_query=$connection->query("SELECT COUNT(*) AS incomplete FROM tasks WHERE is_complete=0");
@@ -51,8 +46,9 @@ if($view=='all'){
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-slate-900">
-    <div class="text-white flex justify-center text-5xl font-bold p-20">
-     <h3>MY TASKS DASHBOARD</h3>
+    <div class="p-20">
+     <h3 class="text-white flex justify-center text-5xl font-bold">MY TASKS DASHBOARD</h3>
+     <a href="/" class=" inline-block bg-slate-700 hover:bg-slate-600 text-white px-6 py-3 rounded-lg font-semibold transition">Go Back</a>
     </div>
     
    <div class="container flex flex-row mx-auto gap-5 max-w-9xl justify-center">
@@ -116,7 +112,8 @@ if($view=='all'){
         </table>
     </div>
    </div>
-
+    
+   
     
 </body>
 </html>

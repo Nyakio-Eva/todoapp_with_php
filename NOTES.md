@@ -60,3 +60,16 @@
 - the request body is parsed by php into an associative array where keys = form name attributes , values= user input.
 
 - $_GET is filled from the query string
+
+## Start building
+- Composer init - to create the json file
+- composer require: vlucas/phpdotenv
+- use sqlite db file = todos.db
+- write a pdo connection script or database configuration = dbConfig.php
+- create the first table= tasks
+- write script file to add a task to db(
+     - a connection
+     - the query
+     - html form
+)
+- Browser -> Web Server-> PHP -> Database
