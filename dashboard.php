@@ -4,29 +4,40 @@ require_once __DIR__. '/dbConfig.php';
 $sql=$connection->query("SELECT COUNT(*) AS total FROM tasks");
 $total_tasks=$sql->fetch(PDO::FETCH_ASSOC)['total'];
 
-$sth=$connection->query("SELECT * FROM tasks");
-$sth->setFetchMode(PDO::FETCH_ASSOC);
-$all_tasks=$sth->fetchAll();
+
 
 
 $sql=$connection->query("SELECT COUNT(*) AS completed FROM tasks WHERE is_complete=1");
 $result=$sql->fetch(PDO::FETCH_ASSOC)['completed'];
 
 
-$smt=$connection->query("SELECT * FROM tasks WHERE is_complete=1");
-$smt->setFetchMode(PDO::FETCH_ASSOC);
-$completed_tasks=$smt->fetchAll();
 
 
 $sql_query=$connection->query("SELECT COUNT(*) AS incomplete FROM tasks WHERE is_complete=0");
 $pending=$sql_query->fetch(PDO::FETCH_ASSOC)['incomplete'];
 
 
-$dbc=$connection->query("SELECT * FROM tasks WHERE is_complete=0");
-$dbc->setFetchMode(PDO::FETCH_ASSOC);
-$incomplete_tasks=$dbc->fetchAll();
+$view = $_GET['filter'] ?? 'all' ; //state
 
-$view_tasks = htmlspecialchars($_GET['filter']);
+$view_tasks=[]; //data
+
+if($view=='all'){
+
+    $sth=$connection->query("SELECT * FROM tasks");
+    $sth->setFetchMode(PDO::FETCH_ASSOC);
+    $view_tasks=$sth->fetchAll(); 
+
+}elseif( $view=='completed'){
+
+    $smt=$connection->query("SELECT * FROM tasks WHERE is_complete=1");
+    $smt->setFetchMode(PDO::FETCH_ASSOC);
+    $view_tasks=$smt->fetchAll();
+}elseif($view=='pending'){
+    
+    $dbc=$connection->query("SELECT * FROM tasks WHERE is_complete=0");
+    $dbc->setFetchMode(PDO::FETCH_ASSOC);
+    $view_tasks=$dbc->fetchAll();
+}
 
 
 ?>
@@ -65,11 +76,14 @@ $view_tasks = htmlspecialchars($_GET['filter']);
    </div>
    <div class="container-fluid text-white py-20 px-10">
     <div class="relative overflow-x-auto bg-neutral-primary-soft shadow-xs rounded-base border border-default">
-        <table class="w-full text-sm text-left rtl:text-right text-body">
+        <table class="w-full text-md text-left rtl:text-right text-body">
             <thead class="text-sm text-body bg-neutral-secondary-soft border-b rounded-base border-default">
                 <tr>
                     <th scope="col" class="px-6 py-3 font-medium text-xl text-purple-500 text-heading">
                         Title
+                    </th>
+                     <th scope="col" class="px-6 py-3 font-medium text-xl text-blue-500 text-heading">
+                        status
                     </th>
                     <th scope="col" class="px-6 py-3 font-medium text-xl text-orange-500 text-heading">
                         Priority
@@ -82,22 +96,25 @@ $view_tasks = htmlspecialchars($_GET['filter']);
             <tbody>
 
              <?php
-               if($all_tasks){
-                filter_list();
-               }elseif($completed_tasks){
-                 filter_has_var(INPUT_GET, "is_complete=1");
-               }else{
-        
-                filter_has_var(INPUT_GET, "is_complete=0");
+              
+               foreach($view_tasks as $row){
+               
+                    echo "<tr class='border-b border-default'> ";
+                    echo"<td>" .$row['title']. "</td>";
+                    echo"<td>" .$row['is_complete']. "</td>";
+                    echo"<td>" .$row['priority']. "</td>";
+                   echo"<td>" .$row['due_date'] ."</td>";
+                   echo "</tr>";
+                    
+
                }
+               
 
              ?>
                 
             </tbody>
         </table>
     </div>
-
-    view tasks here based on the click of stats 
    </div>
 
     
