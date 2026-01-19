@@ -7,15 +7,15 @@ $dotenv->load();
 
 $host=$_ENV['HOST'];
 $dbname=$_ENV['DB_NAME'];
-$username=$_ENV['USERNAME'];
+$username=$_ENV['USER_NAME'];
 $password=$_ENV['PASSWORD'];
 
-var_dump($_ENV['USERNAME']);
+
 
 try{
-    $dbh = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4",$username,$password);
-    $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-   
+    $connection = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4",$username,$password);
+    $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+  
 
 }catch(PDOException $e){
   echo "connection failed:" . $e->getMessage(). "\n";

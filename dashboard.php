@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__. '/dbConfig.php';
+require_once __DIR__. '/mysqlDbConfig.php';
 
 $sql=$connection->query("SELECT COUNT(*) AS total FROM tasks");
 $total_tasks=$sql->fetch(PDO::FETCH_ASSOC)['total'];
