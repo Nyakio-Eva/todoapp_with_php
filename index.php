@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . '/mysqlDbConfig.php';
 
-$tasks="SELECT * FROM tasks";
+$tasks="SELECT * FROM tasks WHERE deleted_at= NULL";
 
 $sql=$connection->query($tasks);
 

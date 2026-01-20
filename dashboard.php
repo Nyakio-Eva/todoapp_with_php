@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__. '/mysqlDbConfig.php';
 
-$sql=$connection->query("SELECT COUNT(*) AS total FROM tasks");
+$sql=$connection->query("SELECT COUNT(*) AS total FROM tasks WHERE deleted_at IS NULL");
 $total_tasks=$sql->fetch(PDO::FETCH_ASSOC)['total'];
 
 $sql=$connection->query("SELECT COUNT(*) AS completed FROM tasks WHERE is_complete=1");
@@ -32,8 +32,12 @@ if($view=='all'){
     $dbc=$connection->query("SELECT * FROM tasks WHERE is_complete=0");
     $dbc->setFetchMode(PDO::FETCH_ASSOC);
     $view_tasks=$dbc->fetchAll();
+}elseif($view=='deleted'){
+    
+    $dbc=$connection->query("SELECT * FROM tasks WHERE deleted_at is NOT NULL");
+    $dbc->setFetchMode(PDO::FETCH_ASSOC);
+    $view_tasks=$dbc->fetchAll();
 }
-
 
 ?>
 
@@ -65,9 +69,9 @@ if($view=='all'){
         <h5 class="mb-3 text-3xl font-semibold text-white tracking-tight text-heading leading-8">Pending Tasks</h5>
         <h4 class="mb-3 text-2xl  text-center text-purple-500 font-bold tracking-tight text-heading leading-8"><?=  $pending?></h4>
     </a>
-    <a href="#" class="bg-white/20 block max-w-sm p-6 border border-default rounded-base shadow-xs hover:bg-neutral-secondary-medium">
+    <a href="dashboard.php?filter=deleted" class="bg-white/20 block max-w-sm p-6 border border-default rounded-base shadow-xs hover:bg-neutral-secondary-medium">
         <h5 class="mb-3 text-3xl font-semibold text-white tracking-tight text-heading leading-8">Deleted Tasks</h5>
-        
+        <h4 class="mb-3 text-2xl  text-center text-purple-500 font-bold tracking-tight text-heading leading-8"><?=  $pending?></h4>
     </a>
    </div>
    <div class="container-fluid text-white py-20 px-10">
@@ -100,6 +104,7 @@ if($view=='all'){
                     echo"<td>" .$row['is_complete']. "</td>";
                     echo"<td>" .$row['priority']. "</td>";
                    echo"<td>" .$row['due_date'] ."</td>";
+                   echo"<td>" .$row['deleted_at'] ."</td>";
                    echo "</tr>";
                     
 

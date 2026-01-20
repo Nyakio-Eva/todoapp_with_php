@@ -73,3 +73,7 @@
      - html form
 )
 - Browser -> Web Server-> PHP -> Database
+
+#### recyclebin functionality
+- delete != remove
+- use soft delete
