@@ -1,7 +1,7 @@
 <?php
-require_once __DIR__. '/mysqlDbConfig.php';
+require_once __DIR__. '/dbConfig.php';
 
-$sql=$connection->query("SELECT COUNT(*) AS total FROM tasks WHERE deleted_at IS NULL");
+$sql=$connection->query("SELECT COUNT(*) AS total FROM tasks");
 $total_tasks=$sql->fetch(PDO::FETCH_ASSOC)['total'];
 
 $sql=$connection->query("SELECT COUNT(*) AS completed FROM tasks WHERE is_complete=1");
@@ -18,7 +18,7 @@ $view_tasks=[]; //data
 
 if($view=='all'){
 
-    $sth=$connection->query("SELECT * FROM tasks");
+    $sth=$connection->query("SELECT * FROM tasks WHERE deleted_at IS NULL");
     $sth->setFetchMode(PDO::FETCH_ASSOC);
     $view_tasks=$sth->fetchAll(); 
 
@@ -34,9 +34,9 @@ if($view=='all'){
     $view_tasks=$dbc->fetchAll();
 }elseif($view=='deleted'){
     
-    $dbc=$connection->query("SELECT * FROM tasks WHERE deleted_at is NOT NULL");
-    $dbc->setFetchMode(PDO::FETCH_ASSOC);
-    $view_tasks=$dbc->fetchAll();
+    $dbs=$connection->query("SELECT * FROM tasks WHERE deleted_at is NOT NULL");
+    $dbs->setFetchMode(PDO::FETCH_ASSOC);
+    $view_tasks=$dbs->fetchAll();
 }
 
 ?>

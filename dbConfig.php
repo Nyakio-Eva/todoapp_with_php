@@ -15,7 +15,7 @@ try{
     // echo "Connected successfully!\n";
 
     $db="
-        
+    
 
         CREATE TABLE IF NOT EXISTS tasks(
             id INTEGER PRIMARY KEY,
@@ -23,7 +23,8 @@ try{
             is_complete INTEGER DEFAULT 0,
             priority TEXT CHECK (priority IN ('High', 'Medium', 'Low')),
             due_date DATE,
-            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            deleted_at TIMESTAMP NULL DEFAULT NULL
         );
         CREATE TABLE IF NOT EXISTS users(
             id INTEGER PRIMARY KEY,

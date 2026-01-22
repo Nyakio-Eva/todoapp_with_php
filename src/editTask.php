@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../mysqlDbConfig.php';
+require_once __DIR__ . '/../dbConfig.php';
 
 $task_id=$_POST["task_id"];
 $new_title=$_POST["title"];

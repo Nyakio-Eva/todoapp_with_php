@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../mysqlDbConfig.php';
+require_once __DIR__ . '/../dbConfig.php';
 
 $task=trim($_POST["task"]);
 $priority=($_POST["priority"]);
