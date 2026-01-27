@@ -11,6 +11,9 @@ $result=$sql->fetch(PDO::FETCH_ASSOC)['completed'];
 $sql_query=$connection->query("SELECT COUNT(*) AS incomplete FROM tasks WHERE is_complete=0");
 $pending=$sql_query->fetch(PDO::FETCH_ASSOC)['incomplete'];
 
+$sql_stm=$connection->query("SELECT COUNT(*) AS deleted FROM tasks WHERE deleted_at IS NOT NULL");
+$deleted=$sql_stm->fetch(PDO::FETCH_ASSOC)['deleted'];
+
 
 $view = $_GET['filter'] ?? 'all' ; //state
 
@@ -71,7 +74,7 @@ if($view=='all'){
     </a>
     <a href="dashboard.php?filter=deleted" class="bg-white/20 block max-w-sm p-6 border border-default rounded-base shadow-xs hover:bg-neutral-secondary-medium">
         <h5 class="mb-3 text-3xl font-semibold text-white tracking-tight text-heading leading-8">Deleted Tasks</h5>
-        <h4 class="mb-3 text-2xl  text-center text-purple-500 font-bold tracking-tight text-heading leading-8"><?=  $pending?></h4>
+        <h4 class="mb-3 text-2xl  text-center text-purple-500 font-bold tracking-tight text-heading leading-8"><?=  $deleted?></h4>
     </a>
    </div>
    <div class="container-fluid text-white py-20 px-10">
@@ -103,9 +106,9 @@ if($view=='all'){
                     echo"<td>" .$row['title']. "</td>";
                     echo"<td>" .$row['is_complete']. "</td>";
                     echo"<td>" .$row['priority']. "</td>";
-                   echo"<td>" .$row['due_date'] ."</td>";
-                   echo"<td>" .$row['deleted_at'] ."</td>";
-                   echo "</tr>";
+                    echo"<td>" .$row['due_date'] ."</td>";
+                    echo"<td>" .$row['deleted_at'] ."</td>";
+                    echo "</tr>";
                     
 
                }
