@@ -24,6 +24,7 @@ try{
             priority TEXT CHECK (priority IN ('High', 'Medium', 'Low')),
             due_date DATE,
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
             deleted_at TIMESTAMP 
         );
         CREATE TABLE IF NOT EXISTS users(
