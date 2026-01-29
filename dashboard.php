@@ -1,14 +1,14 @@
 <?php
 require_once __DIR__. '/dbConfig.php';
 
-$sql=$connection->query("SELECT COUNT(*) AS total FROM tasks");
+$sql=$connection->query("SELECT COUNT(*) AS total FROM tasks WHERE deleted_at IS NULL");
 $total_tasks=$sql->fetch(PDO::FETCH_ASSOC)['total'];
 
-$sql=$connection->query("SELECT COUNT(*) AS completed FROM tasks WHERE is_complete=1");
+$sql=$connection->query("SELECT COUNT(*) AS completed FROM tasks WHERE is_complete=1 AND deleted_at IS NULL");
 $result=$sql->fetch(PDO::FETCH_ASSOC)['completed'];
 
 
-$sql_query=$connection->query("SELECT COUNT(*) AS incomplete FROM tasks WHERE is_complete=0");
+$sql_query=$connection->query("SELECT COUNT(*) AS incomplete FROM tasks WHERE is_complete=0 AND deleted_at IS NULL");
 $pending=$sql_query->fetch(PDO::FETCH_ASSOC)['incomplete'];
 
 $sql_stm=$connection->query("SELECT COUNT(*) AS deleted FROM tasks WHERE deleted_at IS NOT NULL");
@@ -27,12 +27,12 @@ if($view=='all'){
 
 }elseif( $view=='completed'){
 
-    $smt=$connection->query("SELECT * FROM tasks WHERE is_complete=1");
+    $smt=$connection->query("SELECT * FROM tasks WHERE is_complete=1 AND deleted_at IS NULL");
     $smt->setFetchMode(PDO::FETCH_ASSOC);
     $view_tasks=$smt->fetchAll();
 }elseif($view=='pending'){
     
-    $dbc=$connection->query("SELECT * FROM tasks WHERE is_complete=0");
+    $dbc=$connection->query("SELECT * FROM tasks WHERE is_complete=0 AND deleted_at IS NULL");
     $dbc->setFetchMode(PDO::FETCH_ASSOC);
     $view_tasks=$dbc->fetchAll();
 }elseif($view=='deleted'){
@@ -40,6 +40,7 @@ if($view=='all'){
     $dbs=$connection->query("SELECT * FROM tasks WHERE deleted_at is NOT NULL");
     $dbs->setFetchMode(PDO::FETCH_ASSOC);
     $view_tasks=$dbs->fetchAll();
+   
 }
 
 ?>
@@ -88,33 +89,43 @@ if($view=='all'){
                      <th scope="col" class="px-6 py-3 font-medium text-xl text-blue-500 text-heading">
                         status
                     </th>
-                    <th scope="col" class="px-6 py-3 font-medium text-xl text-orange-500 text-heading">
+                    <th scope="col" class="px-6 py-3 font-medium text-xl text-green-500 text-heading">
                         Priority
                     </th>
-                    <th scope="col" class="px-6 py-3 font-medium text-xl text-red-500 text-heading">
+                    <th scope="col" class="px-6 py-3 font-medium text-xl text-yellow-300 text-heading">
                         Due Date
                     </th>
+                    <?php if ($view=='deleted'): ?>
+                        <th class="px-6 py-3 text-red-500">Deleted At</th>
+                    <?php endif; ?>
                 </tr>
             </thead>
             <tbody>
 
-             <?php
-              
-               foreach($view_tasks as $row){
+             <?php foreach($view_tasks as $row):?> 
+                <tr class='border-b border-default'>
+                   <td class="px-6 py-3"><?= htmlspecialchars($row['title']) ?></td>
+                    <td class="px-6 py-3"><?= $row['is_complete'] ? 'Completed' : 'Pending' ?></td>
+                    <td class="px-6 py-3"><?= $row['priority'] ?></td>
+                    <td class="px-6 py-3"><?= $row['due_date'] ?></td>
+                    <?php if ($view=='deleted'): ?>
+                        <td class="px-6 py-3"><?= $row['deleted_at'] ?></td>
+                        <td class="px-6 py-3">
+                            <form action="/src/restoreTask.php" method="post">
+                                <input type="hidden" name="task_id" value="<?= $row['id'] ?>">
+                                <button
+                                    type="submit"
+                                    class="bg-amber-600 hover:bg-amber-700 text-black px-3 py-1 rounded-sm">
+                                    Restore
+                                </button>
+                            </form>
+                        </td>
+                    <?php endif; ?>
+                </tr>
+                <?php endforeach; ?>
                
-                    echo "<tr class='border-b border-default'> ";
-                    echo"<td>" .$row['title']. "</td>";
-                    echo"<td>" .$row['is_complete']. "</td>";
-                    echo"<td>" .$row['priority']. "</td>";
-                    echo"<td>" .$row['due_date'] ."</td>";
-                    echo"<td>" .$row['deleted_at'] ."</td>";
-                    echo "</tr>";
-                    
-
-               }
                
 
-             ?>
                 
             </tbody>
         </table>
